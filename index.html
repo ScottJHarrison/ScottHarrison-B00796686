@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en" ng-app="Dashboard">
+
+<!--HEAD OF HTML-->
+  <head>
+    <meta charset="UTF-8">
+    <title>Video Retrieval</title>
+ 
+
+      <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
+      <script type="text/javascript" src="JS/bootstrap.js"></script>
+      <script type="text/javascript" src="JS/bootstrap.bundle.min.js"></script>
+      <script type="text/javascript" src="JS/jquery-3.6.0.min.js"></script>
+      <script type="text/javascript" src="JS/app.js"></script>
+      
+  </head>
+  <!--END OF HEAD OF HTML-->
+
+  <!--START OF BODY-->
+  <body>
+
+
+    <style>
+      *{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    box-sizing: border-box;
+  }
+  body{
+    font-family: montserrat;
+  }
+  nav{
+    background: #0082e6;
+    height: 80px;
+    width: 100%;
+  }
+  label.logo{
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+  }
+  nav ul{
+    float: right;
+    margin-right: 20px;
+  }
+  nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+  }
+  nav ul li a{
+    color: white;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  a.active,a:hover{
+    background: #1b9bff;
+    transition: .5s;
+  }
+  .checkbtn{
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+  }
+  #check{
+    display: none;
+  }
+  @media (max-width: 952px){
+    label.logo{
+      font-size: 30px;
+      padding-left: 50px;
+    }
+    nav ul li a{
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 858px){
+    .checkbtn{
+      display: block;
+    }
+    ul{
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: #2c3e50;
+      top: 80px;
+      left: -100%;
+      text-align: center;
+      transition: all .5s;
+    }
+    nav ul li{
+      display: block;
+      margin: 50px 0;
+      line-height: 30px;
+    }
+    nav ul li a{
+      font-size: 20px;
+    }
+    a:hover,a.active{
+      background: none;
+      color: #0082e6;
+    }
+    #check:checked ~ ul{
+      left: 0;
+    }
+  }
+  section{
+    background: url(bg1.jpg) no-repeat;
+    background-size: cover;
+    height: calc(100vh - 80px);
+  }
+
+  h4{
+    text-align: center;
+  }
+
+    </style>
+   
+
+
+
+    <!--START OF NAV-->
+    <nav>
+      <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+      <i class="fas fa-bars"></i>
+    </label>
+      <label class = "logo">Video Share</label>
+      <ul>
+        <li><a href="about.html">Home</a></li>
+          <li><a href="index.html">Upload</a></li>
+          <li><a href="index.html">Login</a></li>
+          <li><a href="index.html">About</a></li>
+          <li><a href="index.html">Contact</a></li>
+          
+      </ul>
+  </nav>
+
+  <br>
+
+ 
+
+
+    <!--END OF NAV-->
+
+    <div  class="container">
+
+
+      <div style="padding:5px;">
+        <button  id = "login" type="button" class="btn btn-primary" onclick="login();">login</button>
+      </div>
+      
+
+        <!--Header-->
+        <div class="row align-items-start">
+            <div class="col-2"  ></div>
+
+            <div class="col-8" style="text-align: center;">
+              <h3>Video Share</h3>
+            </div>
+
+            <div class="col-2"  ></div>
+        </div>
+
+        <!--New Asset Box-->
+        <div class="row align-items-start">
+            <div class="col-2"  ></div>
+
+            <div class="col-8" style="text-align: left;border-bottom:1px solid #222222;">
+              <p>Add Video</p>
+
+              <form style="font-size: 10pt;" id="newAssetForm">
+                <div class="mb-3">
+                  <label for="FileName" class="form-label">File Name</label>
+                  <input type="text" class="form-control" id="FileName">
+                </div>
+
+                <div class="mb-3">
+                  <label for="userID" class="form-label">User Id</label>
+                  <input type="string" class="form-control" id="userID">
+                </div>
+
+                <div class="mb-3">
+                  <label for="userName" class="form-label">User Name</label>
+                  <input type="text" class="form-control" id="userName">
+                </div>
+
+                <div class="mb-3">
+                  <label for="UpFile" class="form-label">File to Upload</label>
+                  <input type="file" class="form-control" id="UpFile">
+                </div>
+            
+                <button type="button" id="subNewForm" class="btn btn-primary">Submit</button> <br/><br/>
+                
+              </form>
+            </div>
+
+            <div class="col-2"  ></div>
+        </div>
+
+        <!-- view Asset Area-->
+        <div class="row align-items-start">
+            <div class="col-2"  ></div>
+
+            <div class="col-8" style="text-align: left;" >
+              <div style="padding:5px;">
+                <button  id = "retImages" type="button" class="btn btn-primary">View</button>
+              </div>
+
+              <div id="ImageList">
+
+                <h4>View files stored on the blob storage account</h4>
+
+              </div>
+            </div>
+
+            <div class="col-2"  ></div>
+        </div>
+
+    </div>
+  
+  </body>
+
+  <!--END OF BODY-->
+</html>
